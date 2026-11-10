@@ -106,7 +106,7 @@ let DATA=null,lastStamp=null;
 const barId=()=>{const h=location.hash.slice(1);return DATA&&DATA.bars[h]?h:"13rules"};
 function fit(){
   // длинное название сначала сужаем по ширине (до 75 %), дальше уменьшаем целиком — обрезки не бывает
-  document.querySelectorAll(".tap .name").forEach(box=>{const t=box.firstElementChild;t.style.transform="";const w=box.clientWidth-2,tw=t.scrollWidth;if(tw>w){const r=w/tw,sx=Math.max(r,.75),sy=r<.75?r/.75:1;t.style.transform=`scale(${(r/sy).toFixed(3)},${sy.toFixed(3)})`;}});
+  document.querySelectorAll(".tap .name").forEach(box=>{const t=box.firstElementChild;t.style.transform="";const w=box.clientWidth-2,tw=t.scrollWidth;if(tw>w){const r=w/tw,sy=r<.75?r/.75:1;t.style.transform=`scale(${r.toFixed(3)},${sy.toFixed(3)})`;}});
 }
 function render(){
   if(!DATA)return;
