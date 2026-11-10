@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Тап-лист на ТВ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600&family=Oswald:wght@400;500&display=swap">
+<style>
+/* Layout: black felt letterboard in a thin frame; white condensed caps in grooves; two columns of taps, prices flush right */
+:root{
+  --felt:#111110;
+  --felt-2:#181816;
+  --groove:#050505;
+  --groove-hi:rgba(255,255,255,.07);
+  --letter:#ece2cd;
+  --dim:#9a907d;
+  --frame:#2b2925;
+  --title:"Jost","Futura","Century Gothic",sans-serif;
+  --letters:"Oswald","Roboto Condensed","Arial Narrow",sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:#0a0a09;color:var(--letter);font-family:var(--letters);overflow:hidden;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0}
+.frame{height:100%;padding-block:1.2vh}
+.board{height:100%;max-width:1900px;margin:0 auto;display:flex;flex-direction:column;
+  background:radial-gradient(70% 55% at 22% -8%,rgba(255,196,120,.13),transparent 70%),radial-gradient(70% 55% at 78% -8%,rgba(255,196,120,.10),transparent 70%),radial-gradient(140% 100% at 50% 0%,var(--felt-2),var(--felt) 70%);
+  border:clamp(6px,.7vw,14px) solid var(--frame);box-shadow:inset 0 0 0 1px #000,inset 0 0 40px rgba(0,0,0,.8);
+  padding:1.4vh 2.2vw 1vh}
+header{display:flex;align-items:center;justify-content:center;position:relative;padding-bottom:.6vh}
+h1{margin:0;font-family:var(--title);font-weight:600;text-transform:uppercase;letter-spacing:.06em;font-size:clamp(28px,3.4vw,68px);line-height:1}
+.side{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;pointer-events:none}
+.side>*{pointer-events:auto}
+.bars{display:flex;gap:6px}
+.bars a{font-family:var(--letters);text-transform:uppercase;letter-spacing:.12em;font-size:clamp(10px,.8vw,16px);color:var(--dim);text-decoration:none;padding:.2em .7em;border:1px solid #3a3833}
+.bars a.on{color:var(--felt);background:var(--letter);border-color:var(--letter)}
+.bars a:focus-visible{outline:2px solid var(--letter);outline-offset:2px}
+#clock{font-family:var(--letters);letter-spacing:.14em;font-size:clamp(16px,1.7vw,34px);font-variant-numeric:tabular-nums}
+
+.cols{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr;column-gap:3.4vw}
+.col{min-width:0;display:flex;flex-direction:column}
+.row{display:grid;grid-template-columns:clamp(30px,3vw,60px) minmax(0,1fr) clamp(54px,5.2vw,104px) clamp(56px,5.2vw,104px) clamp(56px,5.2vw,104px);column-gap:1vw;align-items:center;
+  text-transform:uppercase;letter-spacing:.14em;text-shadow:0 0 .6em rgba(255,200,130,.18);
+  border-bottom:clamp(3px,.35vh,5px) solid var(--groove);box-shadow:0 1px 0 var(--groove-hi)}
+.head{color:var(--dim);font-size:clamp(11px,.95vw,19px);padding-block:.4vh .5vh}
+.head span:nth-child(n+3){text-align:right}
+.taps{flex:1;min-height:0;display:grid;list-style:none;margin:0;padding:0}
+.tap{min-width:0}
+.num{color:var(--dim);font-size:clamp(18px,1.9vw,38px);font-variant-numeric:tabular-nums}
+.name{min-width:0;overflow:hidden}
+.name span{display:inline-block;white-space:nowrap;font-size:clamp(20px,2.45vw,48px);line-height:1;transform-origin:left center}
+.abv,.p{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.abv{font-size:clamp(16px,1.7vw,34px);color:var(--dim)}
+.p{font-size:clamp(20px,2.45vw,48px);letter-spacing:.08em}
+.na{opacity:.35}
+footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--dim);font-size:clamp(10px,.8vw,16px);letter-spacing:.12em;text-transform:uppercase;padding-top:.6vh}
+.msg{color:var(--dim);letter-spacing:.12em;text-transform:uppercase;font-size:clamp(14px,1.3vw,26px)}
+
+@media (max-width:900px),(orientation:portrait){
+  body{overflow:auto}
+  .frame,.board{height:auto}
+  .cols{grid-template-columns:1fr}
+  .col+.col .head{display:none}
+  .side{position:static;margin-top:8px}
+  header{flex-direction:column}
+  .row{grid-template-columns:26px minmax(0,1fr) 44px 44px 44px;column-gap:8px;letter-spacing:.08em}
+  .tap{padding-block:10px}
+  .name span{font-size:18px;white-space:normal}
+  .num{font-size:15px}.abv{font-size:13px}.p{font-size:17px}
+}
+</style>
+</head>
+<body>
+<div class="frame"><div class="board">
+  <header>
+    <h1>На кранах</h1>
+    <div class="side">
+      <nav class="bars" id="bars"><a href="#13rules" id="b-13rules">13rules</a><a href="#epo" id="b-epo">Ещё по одной</a></nav>
+      <span id="clock">--:--</span>
+    </div>
+  </header>
+  <div class="cols" id="cols"><p class="msg">Загружаю краны…</p></div>
+  <footer><span>Крепость в % · цены в рублях</span><span id="foot"></span></footer>
+</div></div>
+
+<script>
+// Данные лежат в data.json рядом со страницей: краны каждого бара из GainUp (Продажи → Краны),
+// цены за литр из GainUp, крепость из Untappd. Страница перечитывает файл каждые 5 минут.
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fmt=(v,suf="")=>v==null?"—":String(v).replace(".",",")+suf;
+let DATA=null,lastStamp=null;
+const barId=()=>{const h=location.hash.slice(1);return DATA&&DATA.bars[h]?h:"13rules"};
+function fit(){
+  // длинные названия ужимаем по ширине, не меняя высоту букв слишком сильно
+  document.querySelectorAll(".tap .name").forEach(box=>{const t=box.firstElementChild;t.style.transform="";const w=box.clientWidth,tw=t.scrollWidth;if(tw>w){t.style.transform=`scaleX(${Math.max(.62,w/tw)})`;}});
+}
+function render(){
+  if(!DATA)return;
+  const id=barId(),bar=DATA.bars[id];
+  document.querySelectorAll("#bars a").forEach(a=>a.classList.toggle("on",a.id==="b-"+id));
+  const taps=bar.taps.map(([n,name,pl])=>{const b=DATA.beers[name]||["",name.replace(/\s*розлив\s*$/i,""),"",null];return {n,beer:b[1],abv:b[3],pl}});
+  const half=Math.ceil(taps.length/2),root=document.getElementById("cols");root.innerHTML="";
+  [taps.slice(0,half),taps.slice(half)].forEach(list=>{
+    const col=document.createElement("div");col.className="col";
+    col.innerHTML=`<div class="row head"><span>№</span><span>сорт</span><span>алк.</span><span>0,25 л</span><span>0,4 л</span></div>`;
+    const ul=document.createElement("ul");ul.className="taps";ul.style.gridTemplateRows=`repeat(${half},minmax(0,1fr))`;
+    for(const t of list){
+      const p25=t.pl==null?null:Math.ceil(t.pl*.25-1e-9),p40=t.pl==null?null:Math.ceil(t.pl*.4-1e-9);
+      const li=document.createElement("li");li.className="row tap";
+      li.innerHTML=`<span class="num">${t.n}</span><span class="name"><span>${esc(t.beer)}</span></span><span class="abv${t.abv==null?' na':''}">${fmt(t.abv,"%")}</span><span class="p${p25==null?' na':''}">${fmt(p25)}</span><span class="p${p40==null?' na':''}">${fmt(p40)}</span>`;
+      ul.appendChild(li);
+    }
+    col.appendChild(ul);root.appendChild(col);
+  });
+  fit();
+  const d=new Date(DATA.updated);
+  document.getElementById("foot").textContent=bar.title+" · обновлено "+d.toLocaleDateString("ru-RU",{day:"2-digit",month:"2-digit"})+" "+d.toLocaleTimeString("ru-RU",{hour:"2-digit",minute:"2-digit"});
+}
+async function load(){
+  try{
+    const r=await fetch("data.json?t="+Date.now(),{cache:"no-store"});if(!r.ok)throw new Error(r.status);
+    const j=await r.json();if(j.updated!==lastStamp){DATA=j;lastStamp=j.updated;render();}
+  }catch(e){
+    if(!DATA)document.getElementById("cols").innerHTML='<p class="msg">Не удалось загрузить список кранов. Пробую снова через минуту.</p>';
+    setTimeout(load,60000);
+  }
+}
+load();setInterval(load,5*60000);
+window.addEventListener("hashchange",render);
+window.addEventListener("resize",()=>{clearTimeout(window.__rt);window.__rt=setTimeout(fit,200)});
+if(document.fonts)document.fonts.ready.then(fit);
+function tick(){document.getElementById("clock").textContent=new Date().toLocaleTimeString("ru-RU",{hour:"2-digit",minute:"2-digit"})}
+tick();setInterval(tick,15000);
+setTimeout(()=>location.reload(),6*3600*1000);
+</script>
+</body>
+</html>
