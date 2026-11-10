@@ -41,16 +41,16 @@ h1 span{color:var(--c4)}
 
 .cols{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr;column-gap:2.6vw}
 .col{min-width:0;display:flex;flex-direction:column}
-.head,.tap{display:grid;grid-template-columns:clamp(30px,2.8vw,56px) minmax(0,1fr) clamp(70px,7vw,140px) clamp(40px,3.6vw,72px) clamp(44px,4vw,80px) clamp(44px,4vw,80px);column-gap:.8vw;align-items:center}
+.head,.tap{display:grid;grid-template-columns:clamp(30px,2.8vw,56px) minmax(0,1fr) clamp(100px,9.5vw,190px) clamp(40px,3.4vw,68px) clamp(44px,4vw,80px) clamp(44px,4vw,80px);column-gap:.8vw;align-items:center}
 .head{font-family:var(--label);color:var(--dim);font-size:clamp(11px,.9vw,18px);letter-spacing:.06em;padding-bottom:.4vh;border-bottom:1.5px solid var(--grid)}
 .head span:nth-child(n+3){text-align:center;white-space:nowrap}
 .taps{flex:1;min-height:0;display:grid;list-style:none;margin:0;padding:0}
 .tap{min-width:0;border-bottom:1.5px solid var(--grid);text-shadow:0 0 1px currentColor,0 0 .5px rgba(255,255,255,.3)}
 .num{font-family:"Caveat",cursive;font-weight:700;color:var(--chalk);font-size:clamp(20px,2vw,40px);font-variant-numeric:tabular-nums}
 .name{min-width:0;display:flex;align-items:baseline;gap:.6vw;overflow:hidden}
-.beer{font-size:clamp(20px,2.25vw,45px);line-height:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:0 1 auto}
+.beer{font-size:calc(clamp(22px,2.6vw,52px)*var(--z,1));line-height:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:0 1 auto}
 .brew{font-size:clamp(12px,1.05vw,21px);opacity:.75;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:0 1000 auto}
-.style{font-family:var(--hand);font-size:clamp(14px,1.3vw,26px);text-align:center;line-height:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.style{font-family:var(--hand);font-size:clamp(14px,1.25vw,25px);text-align:center;line-height:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .abv,.p{font-family:"Caveat",cursive;font-weight:600;text-align:center;font-variant-numeric:tabular-nums;white-space:nowrap}
 .abv{font-size:clamp(16px,1.5vw,30px)}
 .p{font-size:clamp(19px,1.85vw,37px);color:var(--chalk)}
@@ -67,7 +67,7 @@ footer{font-family:var(--label);color:var(--dim);font-size:clamp(11px,.9vw,18px)
   .head span:nth-child(3),.tap .style{display:none}
   .tap{padding-block:8px}
   .name{flex-wrap:wrap}
-  .beer{font-size:22px;white-space:normal}.brew{font-size:13px}
+  .beer{font-size:calc(22px*var(--z,1));white-space:normal}.brew{font-size:13px}
   .num{font-size:20px}.abv{font-size:16px}.p{font-size:19px}
 }
 @media (prefers-reduced-motion:no-preference){.tap{transition:opacity .4s}}
@@ -125,7 +125,7 @@ function render(){
       
       const k=hash(t.beer+t.brew), font=FONTS[k%FONTS.length], col="var(--c"+(1+Math.floor(k/7)%8)+")";
       li.innerHTML=`<span class="num">${t.n}</span>
-        <span class="name" style="color:${col}"><span class="beer" style="font-family:${font.f};font-size:calc(1em*${font.z});${font.x||""}">${esc(t.beer)}</span><span class="brew" style="font-family:${font.f}">${esc(t.brew)}</span></span>
+        <span class="name" style="color:${col}"><span class="beer" style="font-family:${font.f};--z:${font.z};${font.x||""}">${esc(t.beer)}</span><span class="brew" style="font-family:${font.f}">${esc(t.brew)}</span></span>
         <span class="style" style="color:${col}">${esc(t.style||"")}</span>
         <span class="abv${t.abv==null?' na':''}" style="color:${col}">${fmt(t.abv)}</span>
         <span class="p${p25==null?' na':''}">${fmt(p25)}</span>
