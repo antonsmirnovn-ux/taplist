@@ -1,84 +1,414 @@
 {
-  "updated": "2026-11-10T10:30:00+03:00",
-  "bars": {
-    "13rules": {
-      "title": "13rules",
-      "taps": [
-        [1, "Вятич, Жигулевское Export розлив", 470],
-        [2, "Bard Brew, Фирменное розлив", 640],
-        [3, "Stamm, Glukshafen розлив", 720],
-        [4, "Bard Brew,100% пиво розлив", 640],
-        [5, "Magic Mess, Вторник weizen розлив", 680],
-        [6, "Panzer, Banana Kraken , розлив", 680],
-        [7, "Bard Brew, UFO розлив", 640],
-        [8, "Alaska, Карамельный Попкорн розлив", 860],
-        [9, "Zavod, Tom Yam розлив", 780],
-        [11, "Nuclear, NeCider розлив", 1240],
-        [12, "Panzer, APA розлив", 820],
-        [13, "Zagovor, Hop Division розлив", 1160],
-        [14, "Panzer, Могиканин розлив", 880],
-        [15, "Барсук, Мед малина розлив", 920],
-        [16, "Меда Сибири, Apricot розлив", 930],
-        [17, "Panzer, Black Cat, розлив", 840],
-        [18, "Paradox, Secret Doors розлив", 1080],
-        [19, "Baltika,  nitro stout розлив", 720]
-      ]
-    },
-    "epo": {
-      "title": "Ещё по одной",
-      "taps": [
-        [1, "Вятич, Жигулевское Export розлив", 470],
-        [2, "Zavod, Ticket to koln розлив", 680],
-        [3, "Stammbeer, Your Young Lordship розлив", 745],
-        [4, "Bard Brew, UFO розлив", 620],
-        [5, "Stamm Beer, Strabenbahn розлив", 745],
-        [6, "Bard Brew, Фирменное розлив", 640],
-        [7, "Panzer, Banana Kraken , розлив", 720],
-        [8, "Baltika, Пшеничное розлив", 670],
-        [9, "Zavod,Morning manya РОЗЛИВ", 820],
-        [10, "Alaska, Маринованые Помидорки розлив", 860],
-        [11, "Заповедник, Абанамат розлив", 960],
-        [12, "New School, Цитрамен розлив", 880],
-        [13, "Zagovor, Hop Division розлив", 1190],
-        [15, "Барсук, медовуха вишня, розлив", 920],
-        [16, "Alaska, Фейхоа розлив", 980],
-        [17, "Panzer, Turttles Stout розлив", 780],
-        [18, "Ostrovica, Oat Stout розлив", 820],
-        [19, "Black Sheep, Irish Stout розлив", 740]
-      ]
-    }
+ "updated": "2026-11-10T11:15:00+03:00",
+ "bars": {
+  "13rules": {
+   "title": "13rules",
+   "taps": [
+    [
+     1,
+     "Вятич, Жигулевское Export розлив",
+     470
+    ],
+    [
+     2,
+     "Bard Brew, Фирменное розлив",
+     640
+    ],
+    [
+     3,
+     "Stamm, Glukshafen розлив",
+     720
+    ],
+    [
+     4,
+     "Bard Brew,100% пиво розлив",
+     640
+    ],
+    [
+     5,
+     "Magic Mess, Вторник weizen розлив",
+     680
+    ],
+    [
+     6,
+     "Panzer, Banana Kraken , розлив",
+     680
+    ],
+    [
+     7,
+     "Bard Brew, UFO розлив",
+     640
+    ],
+    [
+     8,
+     "Alaska, Карамельный Попкорн розлив",
+     860
+    ],
+    [
+     9,
+     "Zavod, Tom Yam розлив",
+     780
+    ],
+    [
+     11,
+     "Nuclear, NeCider розлив",
+     1240
+    ],
+    [
+     12,
+     "Panzer, APA розлив",
+     820
+    ],
+    [
+     13,
+     "Zagovor, Hop Division розлив",
+     1160
+    ],
+    [
+     14,
+     "Panzer, Могиканин розлив",
+     880
+    ],
+    [
+     15,
+     "Барсук, Мед малина розлив",
+     920
+    ],
+    [
+     16,
+     "Меда Сибири, Apricot розлив",
+     930
+    ],
+    [
+     17,
+     "Panzer, Black Cat, розлив",
+     840
+    ],
+    [
+     18,
+     "Paradox, Secret Doors розлив",
+     1080
+    ],
+    [
+     19,
+     "Baltika,  nitro stout розлив",
+     720
+    ]
+   ]
   },
-  "beers": {
-    "Вятич, Жигулевское Export розлив": ["Вятич", "Жигулевское Export", "Немецкий пилснер", 4.7],
-    "Bard Brew, Фирменное розлив": ["Bard Brew", "Фирменное", "Светлый лагер", 4.5],
-    "Stamm, Glukshafen розлив": ["Stamm", "Glückshafen", "Дортмундер экспорт", 5.1],
-    "Bard Brew,100% пиво розлив": ["Bard Brew", "100% пиво", "India Pale Lager", 5],
-    "Magic Mess, Вторник weizen розлив": ["Magic Mess", "Вторник Weizen", "Хефевайцен", 4.5],
-    "Panzer, Banana Kraken , розлив": ["Panzer", "Banana Kraken", "Хефевайцен", 4.5],
-    "Bard Brew, UFO розлив": ["Bard Brew", "UFO Wheat", "Витбир", 4],
-    "Alaska, Карамельный Попкорн розлив": ["Alaska", "Карамельный попкорн", "Пастри-стаут", 6.8],
-    "Zavod, Tom Yam розлив": ["Zavod", "Tom Yam", "Гозе", 4.2],
-    "Nuclear, NeCider розлив": ["Nuclear", "NeCider", "Сидр", null],
-    "Panzer, APA розлив": ["Panzer", "APA", "American Pale Ale", 5],
-    "Zagovor, Hop Division розлив": ["Zagovor", "Hop Division", "American IPA", 6.5],
-    "Panzer, Могиканин розлив": ["Panzer", "Могиканин", "NEIPA", 6.7],
-    "Барсук, Мед малина розлив": ["Барсук", "Мёд малина", "Медовуха", 6],
-    "Меда Сибири, Apricot розлив": ["МедА Сибири", "Apricot", "Медовуха с абрикосом", 6],
-    "Panzer, Black Cat, розлив": ["Panzer", "Black Cat", "Молочный стаут", 5],
-    "Paradox, Secret Doors розлив": ["Paradox", "Secret Doors", "Имперский стаут", 11.5],
-    "Baltika,  nitro stout розлив": ["Балтика", "Nitro Stout", "Стаут, нитро", null],
-    "Zavod, Ticket to koln розлив": ["Zavod", "Ticket to Köln", "Кёльш", 4.3],
-    "Stammbeer, Your Young Lordship розлив": ["Stamm", "Your Young Lordship", "Пилснер", 4.7],
-    "Stamm Beer, Strabenbahn розлив": ["Stamm", "Straßenbahn", "Хефевайцен", 4.5],
-    "Baltika, Пшеничное розлив": ["Балтика", "Пшеничное", "Хефевайцен", 4.8],
-    "Zavod,Morning manya РОЗЛИВ": ["Zavod", "Morning Manya", "Томатный гозе", 4.1],
-    "Alaska, Маринованые Помидорки розлив": ["Alaska", "Маринованные помидорки", "Томатный гозе", 6],
-    "Заповедник, Абанамат розлив": ["Заповедник", "Абанамат", "Сухой сидр", 5],
-    "New School, Цитрамен розлив": ["New School", "Цитрамэн", "American IPA", 5.4],
-    "Барсук, медовуха вишня, розлив": ["Барсук", "Медовуха вишня", "Медовуха", 6],
-    "Alaska, Фейхоа розлив": ["Alaska", "Фейхоа", "Фруктовый сауэр", 5.5],
-    "Panzer, Turttles Stout розлив": ["Panzer", "Turtle's Stout", "Овсяный стаут", 5],
-    "Ostrovica, Oat Stout розлив": ["Ostrovica", "Oat Stout", "Овсяный стаут", 6.5],
-    "Black Sheep, Irish Stout розлив": ["Black Sheep", "Irish Stout", "Ирландский сухой стаут", 4]
+  "epo": {
+   "title": "Ещё по одной",
+   "taps": [
+    [
+     1,
+     "Вятич, Жигулевское Export розлив",
+     470
+    ],
+    [
+     2,
+     "Zavod, Ticket to koln розлив",
+     680
+    ],
+    [
+     3,
+     "Stammbeer, Your Young Lordship розлив",
+     745
+    ],
+    [
+     4,
+     "Bard Brew, UFO розлив",
+     620
+    ],
+    [
+     5,
+     "Stamm Beer, Strabenbahn розлив",
+     745
+    ],
+    [
+     6,
+     "Bard Brew, Фирменное розлив",
+     640
+    ],
+    [
+     7,
+     "Panzer, Banana Kraken , розлив",
+     720
+    ],
+    [
+     8,
+     "Baltika, Пшеничное розлив",
+     670
+    ],
+    [
+     9,
+     "Zavod,Morning manya РОЗЛИВ",
+     820
+    ],
+    [
+     10,
+     "Alaska, Маринованые Помидорки розлив",
+     860
+    ],
+    [
+     11,
+     "Заповедник, Абанамат розлив",
+     960
+    ],
+    [
+     12,
+     "New School, Цитрамен розлив",
+     880
+    ],
+    [
+     13,
+     "Zagovor, Hop Division розлив",
+     1190
+    ],
+    [
+     15,
+     "Барсук, медовуха вишня, розлив",
+     920
+    ],
+    [
+     16,
+     "Alaska, Фейхоа розлив",
+     980
+    ],
+    [
+     17,
+     "Panzer, Turttles Stout розлив",
+     780
+    ],
+    [
+     18,
+     "Ostrovica, Oat Stout розлив",
+     820
+    ],
+    [
+     19,
+     "Black Sheep, Irish Stout розлив",
+     740
+    ]
+   ]
   }
+ },
+ "beers": {
+  "Вятич, Жигулевское Export розлив": [
+   "Вятич",
+   "Жигулевское Export",
+   "Немецкий пилснер",
+   4.7,
+   "mug"
+  ],
+  "Bard Brew, Фирменное розлив": [
+   "Bard Brew",
+   "Фирменное",
+   "Светлый лагер",
+   4.5,
+   "star"
+  ],
+  "Stamm, Glukshafen розлив": [
+   "Stamm",
+   "Glückshafen",
+   "Дортмундер экспорт",
+   5.1,
+   "clover"
+  ],
+  "Bard Brew,100% пиво розлив": [
+   "Bard Brew",
+   "100% пиво",
+   "India Pale Lager",
+   5,
+   "badge"
+  ],
+  "Magic Mess, Вторник weizen розлив": [
+   "Magic Mess",
+   "Вторник Weizen",
+   "Хефевайцен",
+   4.5,
+   "calendar"
+  ],
+  "Panzer, Banana Kraken , розлив": [
+   "Panzer",
+   "Banana Kraken",
+   "Хефевайцен",
+   4.5,
+   "banana"
+  ],
+  "Bard Brew, UFO розлив": [
+   "Bard Brew",
+   "UFO Wheat",
+   "Витбир",
+   4,
+   "ufo"
+  ],
+  "Alaska, Карамельный Попкорн розлив": [
+   "Alaska",
+   "Карамельный попкорн",
+   "Пастри-стаут",
+   6.8,
+   "popcorn"
+  ],
+  "Zavod, Tom Yam розлив": [
+   "Zavod",
+   "Tom Yam",
+   "Гозе",
+   4.2,
+   "chili"
+  ],
+  "Nuclear, NeCider розлив": [
+   "Nuclear",
+   "NeCider",
+   "Сидр",
+   null,
+   "apple"
+  ],
+  "Panzer, APA розлив": [
+   "Panzer",
+   "APA",
+   "American Pale Ale",
+   5,
+   "hop"
+  ],
+  "Zagovor, Hop Division розлив": [
+   "Zagovor",
+   "Hop Division",
+   "American IPA",
+   6.5,
+   "hop"
+  ],
+  "Panzer, Могиканин розлив": [
+   "Panzer",
+   "Могиканин",
+   "NEIPA",
+   6.7,
+   "feather"
+  ],
+  "Барсук, Мед малина розлив": [
+   "Барсук",
+   "Мёд малина",
+   "Медовуха",
+   6,
+   "raspberry"
+  ],
+  "Меда Сибири, Apricot розлив": [
+   "МедА Сибири",
+   "Apricot",
+   "Медовуха с абрикосом",
+   6,
+   "apricot"
+  ],
+  "Panzer, Black Cat, розлив": [
+   "Panzer",
+   "Black Cat",
+   "Молочный стаут",
+   5,
+   "cat"
+  ],
+  "Paradox, Secret Doors розлив": [
+   "Paradox",
+   "Secret Doors",
+   "Имперский стаут",
+   11.5,
+   "door"
+  ],
+  "Baltika,  nitro stout розлив": [
+   "Балтика",
+   "Nitro Stout",
+   "Стаут, нитро",
+   null,
+   "bubbles"
+  ],
+  "Zavod, Ticket to koln розлив": [
+   "Zavod",
+   "Ticket to Köln",
+   "Кёльш",
+   4.3,
+   "ticket"
+  ],
+  "Stammbeer, Your Young Lordship розлив": [
+   "Stamm",
+   "Your Young Lordship",
+   "Пилснер",
+   4.7,
+   "crown"
+  ],
+  "Stamm Beer, Strabenbahn розлив": [
+   "Stamm",
+   "Straßenbahn",
+   "Хефевайцен",
+   4.5,
+   "tram"
+  ],
+  "Baltika, Пшеничное розлив": [
+   "Балтика",
+   "Пшеничное",
+   "Хефевайцен",
+   4.8,
+   "wheat"
+  ],
+  "Zavod,Morning manya РОЗЛИВ": [
+   "Zavod",
+   "Morning Manya",
+   "Томатный гозе",
+   4.1,
+   "tomato"
+  ],
+  "Alaska, Маринованые Помидорки розлив": [
+   "Alaska",
+   "Маринованные помидорки",
+   "Томатный гозе",
+   6,
+   "jar"
+  ],
+  "Заповедник, Абанамат розлив": [
+   "Заповедник",
+   "Абанамат",
+   "Сухой сидр",
+   5,
+   "apple"
+  ],
+  "New School, Цитрамен розлив": [
+   "New School",
+   "Цитрамэн",
+   "American IPA",
+   5.4,
+   "lemon"
+  ],
+  "Барсук, медовуха вишня, розлив": [
+   "Барсук",
+   "Медовуха вишня",
+   "Медовуха",
+   6,
+   "cherry"
+  ],
+  "Alaska, Фейхоа розлив": [
+   "Alaska",
+   "Фейхоа",
+   "Фруктовый сауэр",
+   5.5,
+   "feijoa"
+  ],
+  "Panzer, Turttles Stout розлив": [
+   "Panzer",
+   "Turtle's Stout",
+   "Овсяный стаут",
+   5,
+   "turtle"
+  ],
+  "Ostrovica, Oat Stout розлив": [
+   "Ostrovica",
+   "Oat Stout",
+   "Овсяный стаут",
+   6.5,
+   "bean"
+  ],
+  "Black Sheep, Irish Stout розлив": [
+   "Black Sheep",
+   "Irish Stout",
+   "Ирландский сухой стаут",
+   4,
+   "sheep"
+  ]
+ }
 }
