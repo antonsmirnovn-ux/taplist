@@ -51,15 +51,15 @@ h1{margin:0;font-family:var(--title);font-weight:600;text-transform:uppercase;le
 .taps{flex:1;min-height:0;display:grid;list-style:none;margin:0;padding:0}
 .tap{min-width:0;display:flex;flex-direction:column;justify-content:space-between}
 .tap .row{flex:1;min-height:0}
-.name{min-width:0;overflow:hidden}
+.name{min-width:0;overflow:hidden;padding-block:.1em}
 .name>span{display:inline-block;white-space:nowrap;transform-origin:left center}
 .r{text-align:right;white-space:nowrap}
 /* каждая буква — отдельная карточка: чуть разная посадка и наклон, едва заметный край пластика */
-.t{display:inline-block;font-weight:500;line-height:1;padding:0 .045em;margin:0 .03em;
+.t{display:inline-block;font-weight:500;line-height:1.18;padding:0 .045em;margin:0 .03em;
    background:linear-gradient(rgba(255,255,255,.10),rgba(255,255,255,.03));
    box-shadow:inset 0 0 0 1px rgba(60,45,25,.10);
    transform:translateY(var(--y,0)) rotate(var(--a,0deg))}
-.sp{display:inline-block;width:.42em}
+.t.sp{background:none;box-shadow:none;width:.4em;padding:0;margin:0}
 .num .t{font-size:clamp(20px,2vw,40px)}
 .name .t{font-size:clamp(22px,2.55vw,50px)}
 .abv .t{font-size:clamp(16px,1.6vw,32px);color:var(--dim)}
@@ -101,7 +101,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const fmt=(v,suf="")=>v==null?"—":String(v).replace(".",",")+suf;
 // разбить текст на «карточки»; посадка каждой буквы своя, но постоянная (зависит от текста и позиции)
-const tiles=(str,seed)=>{let h=seed*2654435761>>>0;return [...String(str).toUpperCase()].map((c,i)=>{if(c===" ")return '<span class="sp"></span>';h=(Math.imul(h^c.codePointAt(0),2246822519)+i*374761393)>>>0;const y=((h%7)-3)*.012,a=(((h>>>8)%9)-4)*.12;return `<span class="t" style="--y:${y.toFixed(3)}em;--a:${a.toFixed(2)}deg">${esc(c)}</span>`}).join("")};
+const tiles=(str,seed)=>{let h=seed*2654435761>>>0;return [...String(str).toUpperCase()].map((c,i)=>{if(c===" ")return '<span class="t sp">&nbsp;</span>';h=(Math.imul(h^c.codePointAt(0),2246822519)+i*374761393)>>>0;const y=((h%7)-3)*.012,a=(((h>>>8)%9)-4)*.12;return `<span class="t" style="--y:${y.toFixed(3)}em;--a:${a.toFixed(2)}deg">${esc(c)}</span>`}).join("")};
 let DATA=null,lastStamp=null;
 const barId=()=>{const h=location.hash.slice(1);return DATA&&DATA.bars[h]?h:"13rules"};
 function fit(){
