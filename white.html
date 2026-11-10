@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Тап-лист на ТВ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=PT+Serif:ital@0;1&display=swap">
+<style>
+/* Layout: white enamel price board of a modern rumochnaya: condensed caps, red prices, dotted leaders, two columns */
+:root{
+  --paper:#fbfaf7;
+  --ink:#151515;
+  --grey:#77736c;
+  --rule:#151515;
+  --red:#c8201e;
+  --dots:#b9b4ab;
+  --display:"Oswald","Arial Narrow","Roboto Condensed",sans-serif;
+  --serif:"PT Serif",Georgia,"Times New Roman",serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--display);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0;overflow:hidden}
+.board{height:100%;display:flex;flex-direction:column;gap:1.4vh;padding-block:2.4vh 1.8vh;max-width:1900px;margin:0 auto}
+header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;border-bottom:.5vh double var(--rule);padding-bottom:1vh;border-bottom-width:clamp(4px,.55vh,8px)}
+h1{margin:0;font-weight:700;text-transform:uppercase;font-size:clamp(28px,4.4vw,88px);line-height:.9;letter-spacing:.01em}
+h1 span{color:var(--red)}
+.meta{display:flex;flex-wrap:wrap;gap:1.6vw;align-items:baseline;font-variant-numeric:tabular-nums}
+.bars{display:flex;gap:6px}
+.bars a{font-family:var(--display);text-transform:uppercase;letter-spacing:.06em;font-size:clamp(11px,.85vw,17px);color:var(--grey);text-decoration:none;padding:.25em .7em;border:1.5px solid var(--grey)}
+.bars a.on{color:var(--paper);background:var(--ink);border-color:var(--ink)}
+.bars a:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+#count{font-family:var(--serif);font-style:italic;color:var(--grey);font-size:clamp(12px,1.1vw,22px)}
+#clock{font-weight:600;font-size:clamp(18px,2.2vw,44px)}
+
+.cols{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr;column-gap:3.4vw}
+.col{min-width:0;display:flex;flex-direction:column}
+.head,.tap{display:grid;grid-template-columns:clamp(26px,2.4vw,48px) minmax(0,1fr) clamp(44px,4vw,80px) clamp(52px,4.6vw,92px) clamp(52px,4.6vw,92px);column-gap:.9vw;align-items:baseline}
+.head{font-family:var(--serif);font-style:italic;color:var(--grey);font-size:clamp(11px,.95vw,19px);padding-bottom:.5vh;border-bottom:2px solid var(--rule)}
+.head span:nth-child(n+3){text-align:right;white-space:nowrap}
+.taps{flex:1;min-height:0;display:grid;list-style:none;margin:0;padding:0}
+.tap{min-width:0;align-content:center;border-bottom:1px solid #e3dfd7}
+.num{font-weight:500;color:var(--red);font-size:clamp(15px,1.5vw,30px);font-variant-numeric:tabular-nums}
+.name{min-width:0;display:flex;flex-direction:column}
+.line{min-width:0;display:flex;align-items:baseline;gap:.5vw}
+.line .beer{flex:0 1 auto;min-width:0}
+.beer{display:block;font-weight:600;text-transform:uppercase;font-size:clamp(17px,1.95vw,39px);line-height:1.02;letter-spacing:.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sub{display:block;font-family:var(--serif);font-style:italic;color:var(--grey);font-size:clamp(11px,.95vw,19px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:.2vh}
+.lead{flex:1 1 0;min-width:1.5vw;border-bottom:clamp(2px,.25vw,4px) dotted var(--dots);transform:translateY(-.45em);align-self:center}
+.abv,.p{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.abv{font-weight:400;color:var(--ink);font-size:clamp(14px,1.35vw,27px)}
+.p{font-weight:600;color:var(--red);font-size:clamp(17px,1.95vw,39px)}
+.na{color:var(--dots)!important}
+footer{font-family:var(--serif);font-style:italic;color:var(--grey);font-size:clamp(10px,.85vw,17px);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:2px solid var(--rule);padding-top:.6vh}
+.msg{font-family:var(--serif);font-style:italic;color:var(--grey);font-size:clamp(14px,1.3vw,26px)}
+
+@media (max-width:900px),(orientation:portrait){
+  body{overflow:auto}
+  .board{height:auto}
+  .cols{grid-template-columns:1fr}
+  .col+.col .head{display:none}
+  .head,.tap{grid-template-columns:24px minmax(0,1fr) 40px 46px 46px;column-gap:8px}
+  .tap{padding-block:10px}
+  .beer{font-size:18px;white-space:normal}
+  .sub{font-size:12px;white-space:normal}
+  .lead{display:none}
+  .num{font-size:15px}.abv{font-size:14px}.p{font-size:17px}
+  .head{font-size:12px}
+}
+</style>
+</head>
+<body>
+
+
+<div class="board">
+  <header>
+    <h1>Сегодня <span>на кранах</span></h1>
+    <div class="meta">
+      <nav class="bars" id="bars"><a href="#13rules" id="b-13rules">13rules</a><a href="#epo" id="b-epo">Ещё по одной</a></nav>
+      <span id="count"></span><span id="clock">--:--</span>
+    </div>
+  </header>
+  <div class="cols" id="cols"><p class="msg">Загружаю краны…</p></div>
+  <footer><span>Крепость — в процентах. Цены — в рублях.</span><span id="foot"></span></footer>
+</div>
+
+<script>
+// Данные лежат в data.json рядом со страницей: краны каждого бара из GainUp (Продажи → Краны),
+// цены за литр из GainUp, стиль и крепость из Untappd. Страница перечитывает файл каждые 5 минут.
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fmt=(v,suf="")=>v==null?"—":String(v).replace(".",",")+suf;
+const cell=(v,suf,lbl)=>`<span${v==null?' class="na"':''}${lbl?` data-l="${lbl}"`:''}>${fmt(v,suf)}</span>`;
+let DATA=null, lastStamp=null;
+const barId=()=>{const h=location.hash.slice(1);return DATA&&DATA.bars[h]?h:"13rules"};
+function render(){
+  if(!DATA) return;
+  const id=barId(), bar=DATA.bars[id];
+  document.querySelectorAll("#bars a").forEach(a=>a.classList.toggle("on",a.id==="b-"+id));
+  const taps=bar.taps.map(([n,name,pl])=>{const b=DATA.beers[name]||[ "", name.replace(/\s*розлив\s*$/i,""), "", null ];return {n,brew:b[0],beer:b[1],style:b[2],abv:b[3],pl}});
+  const half=Math.ceil(taps.length/2);
+  const root=document.getElementById("cols");root.innerHTML="";
+  [taps.slice(0,half),taps.slice(half)].forEach(list=>{
+    const col=document.createElement("div");col.className="col";
+    col.innerHTML=`<div class="head"><span>№</span><span>сорт</span><span>алк.</span><span>0,25 л</span><span>0,4 л</span></div>`;
+    const ul=document.createElement("ul");ul.className="taps";ul.style.gridTemplateRows=`repeat(${half},1fr)`;
+    for(const t of list){
+      const p25=t.pl==null?null:Math.ceil(t.pl*0.25-1e-9), p40=t.pl==null?null:Math.ceil(t.pl*0.4-1e-9);
+      const li=document.createElement("li");li.className="tap";
+      const sub=[t.brew,t.style].filter(Boolean).map(esc).join(", ");
+      li.innerHTML=`<span class="num">${t.n}</span>
+        <span class="name"><span class="line"><span class="beer">${esc(t.beer)}</span><span class="lead"></span></span><span class="sub">${sub}</span></span>
+        <span class="abv${t.abv==null?' na':''}">${fmt(t.abv,"%")}</span>
+        <span class="p${p25==null?' na':''}">${fmt(p25)}</span>
+        <span class="p${p40==null?' na':''}">${fmt(p40)}</span>`;
+      ul.appendChild(li);
+    }
+    col.appendChild(ul);root.appendChild(col);
+  });
+  document.getElementById("count").textContent=bar.title+" · "+taps.length+" сортов";
+  const d=new Date(DATA.updated);
+  document.getElementById("foot").textContent="Обновлено "+d.toLocaleDateString("ru-RU",{day:"2-digit",month:"2-digit"})+" "+d.toLocaleTimeString("ru-RU",{hour:"2-digit",minute:"2-digit"});
+}
+async function load(){
+  try{
+    const r=await fetch("data.json?t="+Date.now(),{cache:"no-store"});
+    if(!r.ok) throw new Error(r.status);
+    const j=await r.json();
+    if(j.updated!==lastStamp){DATA=j;lastStamp=j.updated;render();}
+  }catch(e){
+    if(!DATA) document.getElementById("cols").innerHTML='<p class="msg">Не удалось загрузить список кранов. Страница попробует снова через минуту.</p>';
+    setTimeout(load,60000);return;
+  }
+}
+load();setInterval(load,5*60000);
+window.addEventListener("hashchange",render);
+function tick(){document.getElementById("clock").textContent=new Date().toLocaleTimeString("ru-RU",{hour:"2-digit",minute:"2-digit"})}
+tick();setInterval(tick,15000);
+// раз в 6 часов перезагружаем страницу целиком, чтобы ТВ подхватывал правки оформления
+setTimeout(()=>location.reload(),6*3600*1000);
+</script>
+</body>
+</html>
