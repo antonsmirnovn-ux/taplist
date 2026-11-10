@@ -5,78 +5,69 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Тап-лист на ТВ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Golos+Text:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=PT+Serif:ital@0;1&display=swap">
 <style>
-/* Layout: TV board, 16:9 landscape, two columns of taps that fill the screen; one column on phones */
+/* Layout: white enamel price board of a modern rumochnaya: condensed caps, red prices, dotted leaders, two columns */
 :root{
-  --bg:#17110c;
-  --line:#3a2b1e;
-  --fg:#f3e7d6;
-  --muted:#b49b80;
-  --dim:#7d6650;
-  --amber:#f0a432;
-  --amber-ink:#1d1307;
-  --display:"Unbounded","Arial Black",system-ui,sans-serif;
-  --body:"Golos Text",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-  color-scheme:dark;
+  --paper:#fbfaf7;
+  --ink:#151515;
+  --grey:#77736c;
+  --rule:#151515;
+  --red:#c8201e;
+  --dots:#b9b4ab;
+  --display:"Oswald","Arial Narrow","Roboto Condensed",sans-serif;
+  --serif:"PT Serif",Georgia,"Times New Roman",serif;
+  color-scheme:light;
 }
 *{box-sizing:border-box}
 html,body{height:100%}
-body{margin:0}
-body{
-  background:var(--bg);color:var(--fg);font-family:var(--body);
-  padding-left:max(16px,env(safe-area-inset-left,0px));
-  padding-right:max(16px,env(safe-area-inset-right,0px));
-  padding-block:0;overflow:hidden;
-}
-.board{height:100%;display:flex;flex-direction:column;gap:1.2vh;padding-block:2vh 1.6vh;max-width:1900px;margin:0 auto}
-header{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:16px;border-bottom:2px solid var(--line);padding-bottom:1.1vh}
-h1{font-family:var(--display);font-weight:700;font-size:clamp(22px,3vw,58px);letter-spacing:.02em;margin:0;text-transform:uppercase;line-height:1}
-h1 span{color:var(--amber)}
-.meta{display:flex;flex-wrap:wrap;gap:2vw;align-items:baseline;color:var(--muted);font-size:clamp(12px,1.05vw,21px);font-variant-numeric:tabular-nums;white-space:nowrap}
-#clock{font-family:var(--display);font-weight:500;color:var(--fg);font-size:clamp(16px,1.9vw,38px)}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--display);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0;overflow:hidden}
+.board{height:100%;display:flex;flex-direction:column;gap:1.4vh;padding-block:2.4vh 1.8vh;max-width:1900px;margin:0 auto}
+header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;border-bottom:.5vh double var(--rule);padding-bottom:1vh;border-bottom-width:clamp(4px,.55vh,8px)}
+h1{margin:0;font-weight:700;text-transform:uppercase;font-size:clamp(28px,4.4vw,88px);line-height:.9;letter-spacing:.01em}
+h1 span{color:var(--red)}
+.meta{display:flex;flex-wrap:wrap;gap:1.6vw;align-items:baseline;font-variant-numeric:tabular-nums}
+.bars{display:flex;gap:6px}
+.bars a{font-family:var(--display);text-transform:uppercase;letter-spacing:.06em;font-size:clamp(11px,.85vw,17px);color:var(--grey);text-decoration:none;padding:.25em .7em;border:1.5px solid var(--grey)}
+.bars a.on{color:var(--paper);background:var(--ink);border-color:var(--ink)}
+.bars a:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+#count{font-family:var(--serif);font-style:italic;color:var(--grey);font-size:clamp(12px,1.1vw,22px)}
+#clock{font-weight:600;font-size:clamp(18px,2.2vw,44px)}
 
-.cols{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr;column-gap:2.6vw}
+.cols{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr;column-gap:3.4vw}
 .col{min-width:0;display:flex;flex-direction:column}
-.head,.tap{display:grid;grid-template-columns:clamp(34px,3.2vw,64px) minmax(0,1fr) clamp(52px,5vw,100px) clamp(96px,9vw,180px);column-gap:1.1vw;align-items:center}
-.head{color:var(--dim);font-size:clamp(10px,.8vw,16px);text-transform:uppercase;letter-spacing:.1em;padding-bottom:.6vh;border-bottom:1px solid var(--line)}
-.head .stats,.head .price{display:flex;justify-content:space-between;gap:.6em}
-.head .stats span,.head .price span{white-space:nowrap;text-align:right;flex:1}
+.head,.tap{display:grid;grid-template-columns:clamp(26px,2.4vw,48px) minmax(0,1fr) clamp(44px,4vw,80px) clamp(52px,4.6vw,92px) clamp(52px,4.6vw,92px);column-gap:.9vw;align-items:baseline}
+.head{font-family:var(--serif);font-style:italic;color:var(--grey);font-size:clamp(11px,.95vw,19px);padding-bottom:.5vh;border-bottom:2px solid var(--rule)}
+.head span:nth-child(n+3){text-align:right;white-space:nowrap}
 .taps{flex:1;min-height:0;display:grid;list-style:none;margin:0;padding:0}
-.tap{min-width:0;border-bottom:1px solid var(--line);padding-block:.3vh}
-.num{width:100%;aspect-ratio:1;display:grid;place-items:center;border-radius:50%;background:var(--amber);color:var(--amber-ink);font-family:var(--display);font-weight:700;font-size:clamp(13px,1.35vw,27px);font-variant-numeric:tabular-nums}
-.txt{min-width:0;display:flex;flex-direction:column;gap:.25vh}
-.beer{font-weight:600;font-size:clamp(16px,1.75vw,35px);line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.sub{font-size:clamp(10px,.9vw,18px);color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.sub b{font-weight:500;text-transform:uppercase;letter-spacing:.07em;color:var(--fg);opacity:.75}
-.stats,.price{display:flex;justify-content:space-between;font-variant-numeric:tabular-nums}
-.stats span{font-size:clamp(13px,1.3vw,26px);font-weight:500;color:var(--fg);text-align:right;flex:1}
-.price span{font-family:var(--display);font-weight:500;font-size:clamp(13px,1.3vw,26px);color:var(--amber);text-align:right;flex:1}
-.na{color:var(--dim)!important}
-footer{color:var(--dim);font-size:clamp(10px,.8vw,16px);text-align:right}
-.bars{display:flex;gap:4px}
-.bars a{color:var(--dim);text-decoration:none;font-size:clamp(11px,.85vw,17px);padding:.3em .7em;border:1px solid var(--line);border-radius:999px}
-.bars a.on{color:var(--amber-ink);background:var(--amber);border-color:var(--amber)}
-.bars a:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
-.msg{color:var(--muted);font-size:clamp(14px,1.2vw,24px)}
+.tap{min-width:0;align-content:center;border-bottom:1px solid #e3dfd7}
+.num{font-weight:500;color:var(--red);font-size:clamp(15px,1.5vw,30px);font-variant-numeric:tabular-nums}
+.name{min-width:0;display:flex;flex-direction:column}
+.line{min-width:0;display:flex;align-items:baseline;gap:.5vw}
+.line .beer{flex:0 1 auto;min-width:0}
+.beer{display:block;font-weight:600;text-transform:uppercase;font-size:clamp(17px,1.95vw,39px);line-height:1.02;letter-spacing:.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sub{display:block;font-family:var(--serif);font-style:italic;color:var(--grey);font-size:clamp(11px,.95vw,19px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:.2vh}
+.lead{flex:1 1 0;min-width:1.5vw;border-bottom:clamp(2px,.25vw,4px) dotted var(--dots);transform:translateY(-.45em);align-self:center}
+.abv,.p{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.abv{font-weight:400;color:var(--ink);font-size:clamp(14px,1.35vw,27px)}
+.p{font-weight:600;color:var(--red);font-size:clamp(17px,1.95vw,39px)}
+.na{color:var(--dots)!important}
+footer{font-family:var(--serif);font-style:italic;color:var(--grey);font-size:clamp(10px,.85vw,17px);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:2px solid var(--rule);padding-top:.6vh}
+.msg{font-family:var(--serif);font-style:italic;color:var(--grey);font-size:clamp(14px,1.3vw,26px)}
 
-@media (max-width:900px), (orientation:portrait){
+@media (max-width:900px),(orientation:portrait){
   body{overflow:auto}
   .board{height:auto}
-  .cols{grid-template-columns:1fr;row-gap:0}
+  .cols{grid-template-columns:1fr}
   .col+.col .head{display:none}
-  .head,.tap{grid-template-columns:34px minmax(0,1fr) 56px;row-gap:6px}
-  .head .price{display:none}
+  .head,.tap{grid-template-columns:24px minmax(0,1fr) 40px 46px 46px;column-gap:8px}
   .tap{padding-block:10px}
-  .tap .price{grid-column:2 / 4;justify-content:flex-start;gap:14px}
-  .tap .price span{flex:none;font-size:15px}
-  .tap .price span::before{content:attr(data-l);font-family:var(--body);font-size:11px;color:var(--dim);margin-right:4px}
-  .num{font-size:14px}
-  .beer{font-size:17px;white-space:normal}
+  .beer{font-size:18px;white-space:normal}
   .sub{font-size:12px;white-space:normal}
-  .stats span{font-size:14px}
-  .head{font-size:10px}
-  .meta{font-size:12px}
+  .lead{display:none}
+  .num{font-size:15px}.abv{font-size:14px}.p{font-size:17px}
+  .head{font-size:12px}
 }
 </style>
 </head>
@@ -85,14 +76,14 @@ footer{color:var(--dim);font-size:clamp(10px,.8vw,16px);text-align:right}
 
 <div class="board">
   <header>
-    <h1>Сейчас <span>на кранах</span></h1>
+    <h1>Сегодня <span>на кранах</span></h1>
     <div class="meta">
       <nav class="bars" id="bars"><a href="#13rules" id="b-13rules">13rules</a><a href="#epo" id="b-epo">Ещё по одной</a></nav>
       <span id="count"></span><span id="clock">--:--</span>
     </div>
   </header>
   <div class="cols" id="cols"><p class="msg">Загружаю краны…</p></div>
-  <footer id="foot">Крепость, % · цены в рублях</footer>
+  <footer><span>Крепость — в процентах. Цены — в рублях.</span><span id="foot"></span></footer>
 </div>
 
 <script>
@@ -112,23 +103,24 @@ function render(){
   const root=document.getElementById("cols");root.innerHTML="";
   [taps.slice(0,half),taps.slice(half)].forEach(list=>{
     const col=document.createElement("div");col.className="col";
-    col.innerHTML=`<div class="head"><span>№</span><span>Сорт</span><span class="stats"><span>Крепость</span></span><span class="price"><span>0,25 л</span><span>0,4 л</span></span></div>`;
+    col.innerHTML=`<div class="head"><span>№</span><span>сорт</span><span>алк.</span><span>0,25 л</span><span>0,4 л</span></div>`;
     const ul=document.createElement("ul");ul.className="taps";ul.style.gridTemplateRows=`repeat(${half},1fr)`;
     for(const t of list){
       const p25=t.pl==null?null:Math.ceil(t.pl*0.25-1e-9), p40=t.pl==null?null:Math.ceil(t.pl*0.4-1e-9);
       const li=document.createElement("li");li.className="tap";
-      const sub=[t.brew&&`<b>${esc(t.brew)}</b>`,t.style&&esc(t.style)].filter(Boolean).join(" · ");
-      li.innerHTML=`<div class="num">${t.n}</div>
-        <div class="txt"><div class="beer">${esc(t.beer)}</div><div class="sub">${sub}</div></div>
-        <div class="stats">${cell(t.abv,"%")}</div>
-        <div class="price">${cell(p25,"","0,25")}${cell(p40,"","0,4")}</div>`;
+      const sub=[t.brew,t.style].filter(Boolean).map(esc).join(", ");
+      li.innerHTML=`<span class="num">${t.n}</span>
+        <span class="name"><span class="line"><span class="beer">${esc(t.beer)}</span><span class="lead"></span></span><span class="sub">${sub}</span></span>
+        <span class="abv${t.abv==null?' na':''}">${fmt(t.abv,"%")}</span>
+        <span class="p${p25==null?' na':''}">${fmt(p25)}</span>
+        <span class="p${p40==null?' na':''}">${fmt(p40)}</span>`;
       ul.appendChild(li);
     }
     col.appendChild(ul);root.appendChild(col);
   });
-  document.getElementById("count").textContent=taps.length+" сортов";
+  document.getElementById("count").textContent=bar.title+" · "+taps.length+" сортов";
   const d=new Date(DATA.updated);
-  document.getElementById("foot").textContent="Крепость, % · цены в рублях · обновлено "+d.toLocaleDateString("ru-RU",{day:"2-digit",month:"2-digit"})+" "+d.toLocaleTimeString("ru-RU",{hour:"2-digit",minute:"2-digit"});
+  document.getElementById("foot").textContent="Обновлено "+d.toLocaleDateString("ru-RU",{day:"2-digit",month:"2-digit"})+" "+d.toLocaleTimeString("ru-RU",{hour:"2-digit",minute:"2-digit"});
 }
 async function load(){
   try{
