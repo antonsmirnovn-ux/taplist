@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Тап-лист на ТВ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Bad+Script&family=Caveat:wght@600;700&family=Kelly+Slab&family=Marck+Script&family=Neucha&family=Pangolin&family=Underdog&family=Yanone+Kaffeesatz:wght@500;600&display=swap">
+<style>
+/* Layout: slate chalkboard, each tap written by hand in its own chalk color and lettering; two columns, faint chalk grid */
+:root{
+  --slate:#242a2c;
+  --slate-2:#2c3335;
+  --grid:rgba(230,236,232,.10);
+  --chalk:#eef0ea;
+  --dim:#9aa39f;
+  --c1:#ff8fb8; --c2:#7fe0f0; --c3:#b6f06a; --c4:#ffe066; --c5:#ffae5c; --c6:#f4f1ea; --c7:#c7a4ff; --c8:#ff7a6b;
+  --label:"Yanone Kaffeesatz","Arial Narrow",sans-serif;
+  --hand:"Caveat","Marck Script",cursive;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;color:var(--chalk);font-family:var(--hand);overflow:hidden;
+  background:
+    radial-gradient(120% 80% at 30% 20%,rgba(255,255,255,.05),transparent 60%),
+    radial-gradient(90% 70% at 80% 90%,rgba(255,255,255,.035),transparent 60%),
+    var(--slate);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0}
+.board{height:100%;display:flex;flex-direction:column;gap:1vh;padding-block:2vh 1.4vh;max-width:1900px;margin:0 auto}
+header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;padding-bottom:.6vh;border-bottom:2px solid var(--grid)}
+h1{margin:0;font-family:"Amatic SC",var(--hand);font-weight:700;font-size:clamp(34px,4.6vw,92px);line-height:.9;letter-spacing:.03em;text-shadow:0 0 1px rgba(255,255,255,.35)}
+h1 span{color:var(--c4)}
+.meta{display:flex;flex-wrap:wrap;gap:1.6vw;align-items:baseline;font-family:var(--label)}
+.bars{display:flex;gap:6px}
+.bars a{font-family:var(--label);font-size:clamp(12px,.95vw,19px);letter-spacing:.06em;text-transform:uppercase;color:var(--dim);text-decoration:none;padding:.15em .7em;border:1.5px dashed var(--dim);border-radius:6px}
+.bars a.on{color:var(--slate);background:var(--chalk);border:1.5px solid var(--chalk)}
+.bars a:focus-visible{outline:2px solid var(--c4);outline-offset:2px}
+#count{color:var(--dim);font-size:clamp(13px,1.1vw,22px)}
+#clock{font-family:"Caveat",cursive;font-weight:700;font-size:clamp(22px,2.4vw,48px)}
+
+.cols{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr;column-gap:2.6vw}
+.col{min-width:0;display:flex;flex-direction:column}
+.head,.tap{display:grid;grid-template-columns:clamp(30px,2.8vw,56px) minmax(0,1fr) clamp(70px,7vw,140px) clamp(40px,3.6vw,72px) clamp(44px,4vw,80px) clamp(44px,4vw,80px);column-gap:.8vw;align-items:center}
+.head{font-family:var(--label);color:var(--dim);font-size:clamp(11px,.9vw,18px);letter-spacing:.06em;padding-bottom:.4vh;border-bottom:1.5px solid var(--grid)}
+.head span:nth-child(n+3){text-align:center;white-space:nowrap}
+.taps{flex:1;min-height:0;display:grid;list-style:none;margin:0;padding:0}
+.tap{min-width:0;border-bottom:1.5px solid var(--grid);text-shadow:0 0 1px currentColor,0 0 .5px rgba(255,255,255,.3)}
+.num{font-family:"Caveat",cursive;font-weight:700;color:var(--chalk);font-size:clamp(20px,2vw,40px);font-variant-numeric:tabular-nums}
+.name{min-width:0;display:flex;align-items:baseline;gap:.6vw;overflow:hidden}
+.beer{font-size:clamp(20px,2.25vw,45px);line-height:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:0 1 auto}
+.brew{font-size:clamp(12px,1.05vw,21px);opacity:.75;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:0 1000 auto}
+.style{font-family:var(--hand);font-size:clamp(14px,1.3vw,26px);text-align:center;line-height:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.abv,.p{font-family:"Caveat",cursive;font-weight:600;text-align:center;font-variant-numeric:tabular-nums;white-space:nowrap}
+.abv{font-size:clamp(16px,1.5vw,30px)}
+.p{font-size:clamp(19px,1.85vw,37px);color:var(--chalk)}
+.na{opacity:.35}
+footer{font-family:var(--label);color:var(--dim);font-size:clamp(11px,.9vw,18px);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.msg{color:var(--dim);font-size:clamp(16px,1.4vw,28px)}
+
+@media (max-width:900px),(orientation:portrait){
+  body{overflow:auto}
+  .board{height:auto}
+  .cols{grid-template-columns:1fr}
+  .col+.col .head{display:none}
+  .head,.tap{grid-template-columns:28px minmax(0,1fr) 38px 42px 42px;column-gap:8px}
+  .head span:nth-child(3),.tap .style{display:none}
+  .tap{padding-block:8px}
+  .name{flex-wrap:wrap}
+  .beer{font-size:22px;white-space:normal}.brew{font-size:13px}
+  .num{font-size:20px}.abv{font-size:16px}.p{font-size:19px}
+}
+@media (prefers-reduced-motion:no-preference){.tap{transition:opacity .4s}}
+</style>
+</head>
+<body>
+
+
+<div class="board">
+  <header>
+    <h1>Сегодня <span>на кранах</span></h1>
+    <div class="meta">
+      <nav class="bars" id="bars"><a href="#13rules" id="b-13rules">13rules</a><a href="#epo" id="b-epo">Ещё по одной</a></nav>
+      <span id="count"></span><span id="clock">--:--</span>
+    </div>
+  </header>
+  <div class="cols" id="cols"><p class="msg">Загружаю краны…</p></div>
+  <footer><span>крепость в %, цены в рублях</span><span id="foot"></span></footer>
+</div>
+
+<script>
+// Данные лежат в data.json рядом со страницей: краны каждого бара из GainUp (Продажи → Краны),
+// цены за литр из GainUp, стиль и крепость из Untappd. Страница перечитывает файл каждые 5 минут.
+// У каждого сорта свой «почерк» и цвет мелка — выбираются по названию, поэтому не прыгают между обновлениями
+const FONTS=[
+  {f:"'Caveat',cursive",z:1.12,x:"font-weight:700"},
+  {f:"'Marck Script',cursive",z:1.0},
+  {f:"'Neucha',cursive",z:1.0},
+  {f:"'Amatic SC',cursive",z:1.25,x:"font-weight:700;letter-spacing:.02em"},
+  {f:"'Pangolin',cursive",z:.92},
+  {f:"'Kelly Slab',cursive",z:.95},
+  {f:"'Underdog',cursive",z:.95},
+  {f:"'Bad Script',cursive",z:.95}
+];
+const hash=s=>{let h=2166136261;for(const c of s){h^=c.codePointAt(0);h=Math.imul(h,16777619)>>>0}return h};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fmt=(v,suf="")=>v==null?"—":String(v).replace(".",",")+suf;
+const cell=(v,suf,lbl)=>`<span${v==null?' class="na"':''}${lbl?` data-l="${lbl}"`:''}>${fmt(v,suf)}</span>`;
+let DATA=null, lastStamp=null;
+const barId=()=>{const h=location.hash.slice(1);return DATA&&DATA.bars[h]?h:"13rules"};
+function render(){
+  if(!DATA) return;
+  const id=barId(), bar=DATA.bars[id];
+  document.querySelectorAll("#bars a").forEach(a=>a.classList.toggle("on",a.id==="b-"+id));
+  const taps=bar.taps.map(([n,name,pl])=>{const b=DATA.beers[name]||[ "", name.replace(/\s*розлив\s*$/i,""), "", null ];return {n,brew:b[0],beer:b[1],style:b[2],abv:b[3],pl}});
+  const half=Math.ceil(taps.length/2);
+  const root=document.getElementById("cols");root.innerHTML="";
+  [taps.slice(0,half),taps.slice(half)].forEach(list=>{
+    const col=document.createElement("div");col.className="col";
+    col.innerHTML=`<div class="head"><span>№</span><span>СОРТ</span><span>СТИЛЬ</span><span>ABV</span><span>0,25 л</span><span>0,4 л</span></div>`;
+    const ul=document.createElement("ul");ul.className="taps";ul.style.gridTemplateRows=`repeat(${half},1fr)`;
+    for(const t of list){
+      const p25=t.pl==null?null:Math.ceil(t.pl*0.25-1e-9), p40=t.pl==null?null:Math.ceil(t.pl*0.4-1e-9);
+      const li=document.createElement("li");li.className="tap";
+      
+      const k=hash(t.beer+t.brew), font=FONTS[k%FONTS.length], col="var(--c"+(1+Math.floor(k/7)%8)+")";
+      li.innerHTML=`<span class="num">${t.n}</span>
+        <span class="name" style="color:${col}"><span class="beer" style="font-family:${font.f};font-size:calc(1em*${font.z});${font.x||""}">${esc(t.beer)}</span><span class="brew" style="font-family:${font.f}">${esc(t.brew)}</span></span>
+        <span class="style" style="color:${col}">${esc(t.style||"")}</span>
+        <span class="abv${t.abv==null?' na':''}" style="color:${col}">${fmt(t.abv)}</span>
+        <span class="p${p25==null?' na':''}">${fmt(p25)}</span>
+        <span class="p${p40==null?' na':''}">${fmt(p40)}</span>`;
+      ul.appendChild(li);
+    }
+    col.appendChild(ul);root.appendChild(col);
+  });
+  document.getElementById("count").textContent=bar.title+" · "+taps.length+" сортов";
+  const d=new Date(DATA.updated);
+  document.getElementById("foot").textContent="Обновлено "+d.toLocaleDateString("ru-RU",{day:"2-digit",month:"2-digit"})+" "+d.toLocaleTimeString("ru-RU",{hour:"2-digit",minute:"2-digit"});
+}
+async function load(){
+  try{
+    const r=await fetch("data.json?t="+Date.now(),{cache:"no-store"});
+    if(!r.ok) throw new Error(r.status);
+    const j=await r.json();
+    if(j.updated!==lastStamp){DATA=j;lastStamp=j.updated;render();}
+  }catch(e){
+    if(!DATA) document.getElementById("cols").innerHTML='<p class="msg">Не удалось загрузить список кранов. Страница попробует снова через минуту.</p>';
+    setTimeout(load,60000);return;
+  }
+}
+load();setInterval(load,5*60000);
+window.addEventListener("hashchange",render);
+function tick(){document.getElementById("clock").textContent=new Date().toLocaleTimeString("ru-RU",{hour:"2-digit",minute:"2-digit"})}
+tick();setInterval(tick,15000);
+// раз в 6 часов перезагружаем страницу целиком, чтобы ТВ подхватывал правки оформления
+setTimeout(()=>location.reload(),6*3600*1000);
+</script>
+</body>
+</html>
