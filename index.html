@@ -115,7 +115,7 @@ function render(){
     col.innerHTML=`<div class="head"><span>№</span><span>Сорт</span><span class="stats"><span>Крепость</span></span><span class="price"><span>0,25 л</span><span>0,4 л</span></span></div>`;
     const ul=document.createElement("ul");ul.className="taps";ul.style.gridTemplateRows=`repeat(${half},1fr)`;
     for(const t of list){
-      const p25=t.pl==null?null:Math.round(t.pl*0.25*10)/10, p40=t.pl==null?null:Math.round(t.pl*0.4*10)/10;
+      const p25=t.pl==null?null:Math.ceil(t.pl*0.25-1e-9), p40=t.pl==null?null:Math.ceil(t.pl*0.4-1e-9);
       const li=document.createElement("li");li.className="tap";
       const sub=[t.brew&&`<b>${esc(t.brew)}</b>`,t.style&&esc(t.style)].filter(Boolean).join(" · ");
       li.innerHTML=`<div class="num">${t.n}</div>
