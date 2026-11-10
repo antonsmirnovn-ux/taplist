@@ -48,8 +48,8 @@ h1 span{color:var(--c4)}
 .tap{min-width:0;border-bottom:1.5px solid var(--grid);text-shadow:0 0 1px currentColor,0 0 .5px rgba(255,255,255,.3)}
 .num{font-family:"Caveat",cursive;font-weight:700;color:var(--chalk);font-size:clamp(22px,2.3vw,46px);font-variant-numeric:tabular-nums}
 .name{min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:.1vh;overflow:hidden}
-.line{display:flex;align-items:center;gap:.6vw;max-width:100%;min-width:0}
-.beer{font-size:calc(clamp(24px,2.95vw,58px)*var(--z,1));line-height:1;white-space:nowrap;min-width:0}
+.line{display:inline-flex;align-items:center;gap:.6vw;width:max-content}
+.beer{font-size:calc(clamp(24px,2.95vw,58px)*var(--z,1));line-height:1;white-space:nowrap;flex:none}
 .ico{flex:none;width:clamp(26px,2.6vw,52px);height:clamp(26px,2.6vw,52px);fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;opacity:.92}
 .brew{font-size:clamp(13px,1.3vw,26px);opacity:.7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;line-height:1}
 .style{font-family:var(--hand);font-size:clamp(15px,1.45vw,29px);text-align:center;line-height:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -178,7 +178,7 @@ function render(){
     col.appendChild(ul);root.appendChild(col);
   });
   // длинные названия ужимаем, чтобы влезали целиком
-  document.querySelectorAll(".tap .line").forEach(ln=>{const el=ln.querySelector(".beer");let f=parseFloat(getComputedStyle(el).fontSize);const w=ln.parentElement.clientWidth;while(ln.scrollWidth>w&&f>12){f-=1;el.style.fontSize=f+"px"}});
+  document.querySelectorAll(".tap .line").forEach(ln=>{const el=ln.querySelector(".beer");let f=parseFloat(getComputedStyle(el).fontSize);const w=ln.parentElement.clientWidth;while(ln.getBoundingClientRect().width>w&&f>12){f-=1;el.style.fontSize=f+"px"}});
   document.getElementById("count").textContent=bar.title+" · "+taps.length+" сортов";
   const d=new Date(DATA.updated);
   document.getElementById("foot").textContent="Обновлено "+d.toLocaleDateString("ru-RU",{day:"2-digit",month:"2-digit"})+" "+d.toLocaleTimeString("ru-RU",{hour:"2-digit",minute:"2-digit"});
