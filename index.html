@@ -9,10 +9,10 @@
 <style>
 /* Layout: black felt letterboard in a thin frame; white condensed caps in grooves; two columns of taps, prices flush right */
 :root{
-  --glow:#d9cfb9;
-  --glow-edge:#a99d84;
-  --ink:#1c1813;
-  --dim:#5e5444;
+  --glow:#b9a888;
+  --glow-edge:#7d6e55;
+  --ink:#140f0a;
+  --dim:#3b3226;
   --rail:#5a4a36;
   --rail-dark:#3a2f22;
   --frame:#15130f;
@@ -27,9 +27,9 @@ body{margin:0;background:#0d0b09;color:var(--ink);font-family:var(--letters);ove
 .frame{height:100%;padding-block:1.2vh}
 /* приглушённый лайтбокс: тёплый свет в центре, к краям темнеет */
 .board{height:100%;max-width:1900px;margin:0 auto;display:flex;flex-direction:column;
-  background:radial-gradient(85% 75% at 50% 45%,var(--glow) 0%,#cbbfa6 55%,var(--glow-edge) 100%);
+  background:radial-gradient(85% 75% at 50% 45%,var(--glow) 0%,#a8977a 60%,var(--glow-edge) 100%);
   border:clamp(8px,.9vw,18px) solid var(--frame);
-  box-shadow:inset 0 0 60px rgba(40,28,10,.45),0 0 0 1px #000;
+  box-shadow:inset 0 0 90px rgba(40,24,5,.6),0 0 0 1px #000;
   padding:1.2vh 2.4vw .8vh}
 header{display:flex;align-items:center;justify-content:center;position:relative;padding-bottom:.4vh}
 h1{margin:0;font-family:var(--title);font-weight:600;text-transform:uppercase;letter-spacing:.05em;font-size:clamp(28px,3.4vw,68px);line-height:1;color:var(--ink)}
@@ -56,13 +56,13 @@ h1{margin:0;font-family:var(--title);font-weight:600;text-transform:uppercase;le
 .r{text-align:right;white-space:nowrap}
 /* каждая буква — отдельная карточка: чуть разная посадка и наклон, едва заметный край пластика */
 .t{display:inline-block;font-weight:500;line-height:1.18;padding:0 .045em;margin:0 .03em;
-   background:linear-gradient(rgba(255,255,255,.10),rgba(255,255,255,.03));
-   box-shadow:inset 0 0 0 1px rgba(60,45,25,.10);
+   background:linear-gradient(rgba(255,240,210,.10),rgba(255,240,210,.03));
+   box-shadow:inset 0 0 0 1px rgba(40,28,12,.14);
    transform:translateY(var(--y,0)) rotate(var(--a,0deg))}
 .t.sp{background:none;box-shadow:none;width:.4em;padding:0;margin:0}
 .num .t{font-size:clamp(20px,2vw,40px)}
 .name .t{font-size:clamp(22px,2.55vw,50px)}
-.abv .t{font-size:clamp(16px,1.6vw,32px);color:var(--dim)}
+.abv .t{font-size:clamp(16px,1.6vw,32px);color:var(--ink);background:none;box-shadow:none}
 .p .t{font-size:clamp(22px,2.55vw,50px)}
 .na{opacity:.35}
 footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--dim);font-size:clamp(10px,.8vw,16px);letter-spacing:.12em;text-transform:uppercase;padding-top:.5vh}
@@ -105,8 +105,8 @@ const tiles=(str,seed)=>{let h=seed*2654435761>>>0;return [...String(str).toUppe
 let DATA=null,lastStamp=null;
 const barId=()=>{const h=location.hash.slice(1);return DATA&&DATA.bars[h]?h:"13rules"};
 function fit(){
-  // длинные названия ужимаем по ширине, не меняя высоту букв слишком сильно
-  document.querySelectorAll(".tap .name").forEach(box=>{const t=box.firstElementChild;t.style.transform="";const w=box.clientWidth,tw=t.scrollWidth;if(tw>w){t.style.transform=`scaleX(${Math.max(.62,w/tw)})`;}});
+  // длинное название сначала сужаем по ширине (до 75 %), дальше уменьшаем целиком — обрезки не бывает
+  document.querySelectorAll(".tap .name").forEach(box=>{const t=box.firstElementChild;t.style.transform="";const w=box.clientWidth-2,tw=t.scrollWidth;if(tw>w){const r=w/tw,sx=Math.max(r,.75),sy=r<.75?r/.75:1;t.style.transform=`scale(${(r/sy).toFixed(3)},${sy.toFixed(3)})`;}});
 }
 function render(){
   if(!DATA)return;
@@ -143,6 +143,7 @@ load();setInterval(load,5*60000);
 window.addEventListener("hashchange",render);
 window.addEventListener("resize",()=>{clearTimeout(window.__rt);window.__rt=setTimeout(fit,200)});
 if(document.fonts)document.fonts.ready.then(fit);
+window.addEventListener("load",()=>{fit();setTimeout(fit,3000)});
 function tick(){document.getElementById("clock").textContent=new Date().toLocaleTimeString("ru-RU",{hour:"2-digit",minute:"2-digit"})}
 tick();setInterval(tick,15000);
 setTimeout(()=>location.reload(),6*3600*1000);
