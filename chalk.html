@@ -27,7 +27,7 @@ body{margin:0;color:var(--chalk);font-family:var(--hand);overflow:hidden;
     radial-gradient(90% 70% at 80% 90%,rgba(255,255,255,.035),transparent 60%),
     var(--slate);
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0}
-.board{height:100%;display:flex;flex-direction:column;gap:1vh;padding-block:2vh 1.4vh;max-width:1900px;margin:0 auto}
+.board{height:100%;display:flex;flex-direction:column;gap:.8vh;padding-block:1.4vh 1vh;max-width:1900px;margin:0 auto}
 header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;padding-bottom:.6vh;border-bottom:2px solid var(--grid)}
 h1{margin:0;font-family:"Amatic SC",var(--hand);font-weight:700;font-size:clamp(30px,3.6vw,72px);line-height:.9;letter-spacing:.03em;text-shadow:0 0 1px rgba(255,255,255,.35)}
 h1 span{color:var(--c4)}
@@ -49,9 +49,9 @@ h1 span{color:var(--c4)}
 .num{font-family:"Caveat",cursive;font-weight:700;color:var(--chalk);font-size:clamp(24px,2.7vw,52px);font-variant-numeric:tabular-nums}
 .name{min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:.1vh;overflow:hidden}
 .line{display:inline-flex;align-items:center;gap:.6vw;width:max-content}
-.beer{font-size:calc(clamp(26px,3.5vw,68px)*var(--z,1));line-height:1;white-space:nowrap;flex:none}
+.beer{font-size:calc(clamp(26px,3.1vw,60px)*var(--z,1));line-height:1;white-space:nowrap;flex:none}
 .ico{flex:none;width:clamp(28px,3vw,58px);height:clamp(28px,3vw,58px);fill:none;stroke:currentColor;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round;opacity:.92}
-.brew{font-family:"Neucha",var(--hand);font-size:clamp(15px,1.6vw,31px);color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;line-height:1}
+.brew{font-family:"Neucha",var(--hand);font-size:clamp(14px,1.35vw,26px);color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;line-height:1}
 .style{font-family:var(--hand);font-size:clamp(15px,1.45vw,29px);text-align:center;line-height:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .abv,.p{font-family:"Caveat",cursive;font-weight:600;text-align:center;font-variant-numeric:tabular-nums;white-space:nowrap}
 .abv{font-size:clamp(20px,2.2vw,42px)}
@@ -96,9 +96,9 @@ footer{font-family:var(--label);color:var(--dim);font-size:clamp(11px,.9vw,18px)
 // цены за литр из GainUp, стиль и крепость из Untappd. Страница перечитывает файл каждые 5 минут.
 // У каждого сорта свой «почерк» и цвет мелка — выбираются по названию, поэтому не прыгают между обновлениями
 const FONTS=[
-  {f:"'Caveat',cursive",z:1.18,x:"font-weight:700"},
+  {f:"'Caveat',cursive",z:1.12,x:"font-weight:700"},
   {f:"'Neucha',cursive",z:1.0},
-  {f:"'Amatic SC',cursive",z:1.3,x:"font-weight:700;letter-spacing:.03em"},
+  {f:"'Amatic SC',cursive",z:1.2,x:"font-weight:700;letter-spacing:.03em"},
   {f:"'Pangolin',cursive",z:.95}
 ];
 // Контурные «меловые» рисунки, viewBox 0 0 32 32, рисуются цветом сорта (currentColor)
@@ -156,7 +156,7 @@ function render(){
   [taps.slice(0,half),taps.slice(half)].forEach(list=>{
     const col=document.createElement("div");col.className="col";
     col.innerHTML=`<div class="head"><span>№</span><span>СОРТ</span><span>КРЕП.</span><span>0,25 л</span><span>0,4 л</span></div>`;
-    const ul=document.createElement("ul");ul.className="taps";ul.style.gridTemplateRows=`repeat(${half},1fr)`;
+    const ul=document.createElement("ul");ul.className="taps";ul.style.gridTemplateRows=`repeat(${half},minmax(0,1fr))`;
     for(const t of list){
       const p25=t.pl==null?null:Math.ceil(t.pl*0.25-1e-9), p40=t.pl==null?null:Math.ceil(t.pl*0.4-1e-9);
       const li=document.createElement("li");li.className="tap";
